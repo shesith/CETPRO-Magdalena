@@ -80,7 +80,7 @@ export default function Form() {
     } catch (err) {
       setLoad(false);
       const { response } = err;
-      console.log(response);
+      // console.log(response);
       if (response.status === 422) {
         setError(response.data.message.split(". ")[0]);
         setErrorToast(true);
@@ -126,6 +126,7 @@ export default function Form() {
 
   return (
     <>
+      {/* Mostrar loader cuando se envien los datos al momento de dar clic al boton enviar */}
       {load ? <Loader /> : null}
       <article>
         {/* AQUI SE MANDA A LLAMAR LA FUNCION DE LA PETICION Y ESTA SE EJECUTARA CUANDO SE LE DE AL BOTON ENVIAR */}
@@ -238,6 +239,7 @@ export default function Form() {
               id="fecha_nac"
               value={formData.fecha_nac}
               onChange={handleChange}
+              max="2010-01-01"
             />
 
             {/* CURSO */}
@@ -288,7 +290,7 @@ export default function Form() {
         </form>
       </article>
       {message ? (
-        <div className="absolute bottom-4 right-4 border-[#608DC4] border-2 text-[#608DC4] shadow-xl rounded-md text-center text-2xl font-bold pt-4 p-4 flex justify-center items-center gap-4">
+        <div className="absolute bottom-4 right-4 border-[#608DC4] border-2 text-[#608DC4] shadow-xl rounded-md text-center text-2xl font-bold p-4 flex justify-center items-center gap-4 animate-appear">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-circle-check-filled"
@@ -312,7 +314,7 @@ export default function Form() {
         </div>
       ) : null}
       {errorToast ? (
-        <div className="absolute bottom-4 right-4 border-red-500 border-2 text-red-500 shadow-xl rounded-md text-center text-2xl font-bold pt-4 p-4 flex justify-center items-center gap-4">
+        <div className="absolute bottom-4 right-4 border-red-500 border-2 text-red-500 shadow-xl rounded-md text-center text-2xl font-bold pt-4 p-4 flex justify-center items-center gap-4 animate-appear">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-exclamation-circle"
@@ -330,7 +332,7 @@ export default function Form() {
             <path d="M12 9v4" />
             <path d="M12 16v.01" />
           </svg>
-          <p>{error}</p>
+          <p>Error: {error}</p>
         </div>
       ) : null}
     </>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
+import { json } from "react-router-dom";
 
 export default function Form() {
   // const dataToSend = {
@@ -17,13 +18,13 @@ export default function Form() {
 
   const [formData, setFormData] = useState({
     dni: "",
-    nombre: "",
-    apellido: "",
+    nombre_alumno: "",
+    apellido_alumno: "",
     distrito: "",
     telefono: "",
     correo: "",
     edad: "",
-    fechaNacimiento: "",
+    fecha_nac: "",
     // curso: "",
     // horario: ""
   });
@@ -34,7 +35,6 @@ export default function Form() {
       ...formData,
       [name]: value,
     });
-    console.log();
   };
 
   const handleSubmit = async (e) => {
@@ -48,20 +48,10 @@ export default function Form() {
         body: JSON.stringify(formData),
       });
       const errorData = await response.json();
-      console.error("Error en la solicitud:", errorData);
+
+      console.log("respuesta", errorData);
 
       if (!response.ok) {
-        setFormData({
-          ...formData,
-          dni: "",
-          nombre: "",
-          apellido: "",
-          distrito: "",
-          telefono: "",
-          correo: "",
-          edad: "",
-          fechaNacimiento: "",
-        });
         throw {
           err: true,
           status: response.status,
@@ -91,26 +81,26 @@ export default function Form() {
         <form onSubmit={handleSubmit}>
           <div>
             {/* NOMBRE */}
-            <label htmlFor="nombre"> Nombres </label>
+            <label htmlFor="nombre_alumno"> Nombres </label>
             <input
               type="text"
-              name="nombre"
-              id="nombre"
+              name="nombre_alumno"
+              id="nombre_alumno"
               placeholder="Escribe tus nombres"
               required
               maxLength="50"
-              value={formData.nombre}
+              value={formData.nombre_alumno}
               onChange={handleChange}
             />
             {/* APELLIDO */}
-            <label htmlFor="apellido"> Apellido Paterno </label>
+            <label htmlFor="apellido_alumno"> Apellido Paterno </label>
             <input
               type="text"
-              name="apellido"
-              id="apellido"
+              name="apellido_alumno"
+              id="apellido_alumno"
               placeholder="Escribe tu apellido"
               required
-              value={formData.apellido}
+              value={formData.apellido_alumno}
               onChange={handleChange}
               maxLength="50"
             />
@@ -174,12 +164,6 @@ export default function Form() {
               maxLength="3"
             />
             <div>
-              {/* <label htmlFor="documents"> Selecciona una opción</label>
-          <select name="documents" required>
-            <option value="dni"> DNI </option>
-            <option value="passport">Pasaporte</option>
-            <option value="carnet">Carnet de Extranjería</option>
-          </select> */}
               {/* DNI */}
               <label htmlFor="dni"> N° Documento</label>
               <input
@@ -192,12 +176,12 @@ export default function Form() {
                 onChange={handleChange}
                 maxLength="20"
               />
-              <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
+              <label htmlFor="fecha_nac">Fecha de Nacimiento</label>
               <input
                 type="date"
-                name="fechaNacimiento"
-                id="fechaNacimiento"
-                value={formData.fechaNacimiento}
+                name="fecha_nac"
+                id="fecha_nac"
+                value={formData.fecha_nac}
                 onChange={handleChange}
               />
             </div>

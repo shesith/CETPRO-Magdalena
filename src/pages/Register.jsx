@@ -16,7 +16,7 @@ export default function Register() {
         <div className="backdrop">
           <h2>FICHA MATRÍCULA</h2>
         </div>
-        <div className="container-form">
+        <div className="container px-6 py-6">
           <Form />
         </div>
       </section>

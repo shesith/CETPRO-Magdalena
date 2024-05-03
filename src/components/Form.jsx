@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import { useFetch } from "../hooks/useFetch";
-import { json } from "react-router-dom";
+import { useState } from "react";
 import Loader from "./Loader";
 import axios from "axios";
 
@@ -27,21 +25,17 @@ export default function Form() {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-
       [name]: value,
     });
   };
-
-  // const validations = () => {
-  //   handleSubmit();
-  // };
-  const [messageVisible, setMessageVisible] = useState(false);
 
   // FUNCION PARA HACER LA PETICION A LA API ESTE BOTON SE MANDA A LLAMAR EN EL FORM
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoad(true);
+    // Se manejan exepciones en caso de un error con el try catch
     try {
+      // Consumiento la api mediante axios con el metodo post
       const response = await axios.post(
         "http://127.0.0.1:8000/api/students",
         formData,
@@ -52,11 +46,10 @@ export default function Form() {
         }
       );
 
-      // const message = await response.json();
-
       // console.log("MENSAJE", message);
       // console.log("respuesta", response);
 
+      // Validacion de respuesta exitoso 201 (Creacion con exito)
       if (response.status === 201) {
         setLoad(false);
         setFormData({
@@ -81,6 +74,8 @@ export default function Form() {
       setLoad(false);
       const { response } = err;
       // console.log(response);
+
+      // Validacion en caso de error 422 (Algun dato ya existe en la BD)
       if (response.status === 422) {
         setError(response.data.message.split(". ")[0]);
         setErrorToast(true);
@@ -102,6 +97,7 @@ export default function Form() {
         }, 5000);
       }
 
+      // Validacion error 500 (error interno del servidor)
       if (response.status === 500) {
         alert(response.data.message);
         setFormData({
@@ -163,7 +159,7 @@ export default function Form() {
             <input
               type="text"
               name="distrito"
-              id="dstrito"
+              id="distrito"
               placeholder="Escribe tu distrito"
               required
               value={formData.distrito}
@@ -251,9 +247,7 @@ export default function Form() {
               onChange={handleChange}
               value={formData.curso}
             >
-              <option value="" selected>
-                Selecciona una carrera
-              </option>
+              <option value="">Selecciona una carrera</option>
               <option value="Artesanía y Manualidades">
                 Artesanía y Manualidades
               </option>
@@ -273,9 +267,7 @@ export default function Form() {
               value={formData.horario}
               required
             >
-              <option value="" selected>
-                Selecciona un horario
-              </option>
+              <option value="">Selecciona un horario</option>
               <option value="mañana">Mañana</option>
               <option value="tarde">Tarde</option>
               <option value="noche">Noche</option>
@@ -289,6 +281,8 @@ export default function Form() {
           </div>
         </form>
       </article>
+
+      {/* Mensaje de respuesta en caso de ser el registro exitoso */}
       {message ? (
         <div className="absolute bottom-4 right-4 border-[#608DC4] border-2 text-[#608DC4] shadow-xl rounded-md text-center text-2xl font-bold p-4 flex justify-center items-center gap-4 animate-appear">
           <svg
@@ -313,6 +307,8 @@ export default function Form() {
           <p>¡Te has matriculado exitosamente!</p>
         </div>
       ) : null}
+
+      {/* Mensaje de respuesta en caso de que haya un error */}
       {errorToast ? (
         <div className="absolute bottom-4 right-4 border-red-500 border-2 text-red-500 shadow-xl rounded-md text-center text-2xl font-bold pt-4 p-4 flex justify-center items-center gap-4 animate-appear">
           <svg

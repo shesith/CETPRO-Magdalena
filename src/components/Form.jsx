@@ -47,7 +47,7 @@ export default function Form() {
       );
 
       // console.log("MENSAJE", message);
-      // console.log("respuesta", response);
+      //console.log("respuesta", response);
 
       // Validacion de respuesta exitoso 201 (Creacion con exito)
       if (response.status === 201) {
@@ -73,7 +73,7 @@ export default function Form() {
     } catch (err) {
       setLoad(false);
       const { response } = err;
-      // console.log(response);
+      //console.log(response);
 
       // Validacion en caso de error 422 (Algun dato ya existe en la BD)
       if (response.status === 422) {
@@ -99,6 +99,7 @@ export default function Form() {
 
       // Validacion error 500 (error interno del servidor)
       if (response.status === 500) {
+        //console.log(response);
         alert(response.data.message);
         setFormData({
           ...formData,
@@ -273,7 +274,7 @@ export default function Form() {
               <option value="noche">Noche</option>
             </select>
             <button
-              className="cursor-pointer block w-full rounded-lg p-3 mt-5 bg-[#608dc4] font-bold text-white text-center active:opacity-75"
+              className="cursor-pointer block w-full rounded-lg p-3 mt-5 bg-[#bb1616] font-bold text-white text-center active:opacity-75 "
               type="submit"
             >
               Enviar
@@ -284,7 +285,7 @@ export default function Form() {
 
       {/* Mensaje de respuesta en caso de ser el registro exitoso */}
       {message ? (
-        <div className="absolute bottom-4 right-4 border-[#608DC4] border-2 text-[#608DC4] shadow-xl rounded-md text-center text-2xl font-bold p-4 flex justify-center items-center gap-4 animate-appear">
+        <div className="absolute bottom-4 right-4 border-[#608DC4] border-2 text-[#608DC4] shadow-xl rounded-md text-center text-2xl font-bold p-4 flex justify-center items-center gap-4 animate-appear bg-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-circle-check-filled"
@@ -310,7 +311,7 @@ export default function Form() {
 
       {/* Mensaje de respuesta en caso de que haya un error */}
       {errorToast ? (
-        <div className="absolute bottom-4 right-4 border-red-500 border-2 text-red-500 shadow-xl rounded-md text-center text-2xl font-bold pt-4 p-4 flex justify-center items-center gap-4 animate-appear">
+        <div className="absolute bottom-4 right-4 border-red-500 border-2 text-red-500 shadow-xl rounded-md text-center text-2xl font-bold pt-4 p-4 flex justify-center items-center gap-4 animate-appear bg-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-exclamation-circle"

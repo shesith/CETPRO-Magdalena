@@ -1,3 +1,4 @@
+import FooterForm from "../components/FooterForm";
 import Form from "../components/Form";
 export default function Register() {
   return (
@@ -20,6 +21,7 @@ export default function Register() {
           <Form />
         </div>
       </section>
+      <FooterForm />
     </>
   );
 }

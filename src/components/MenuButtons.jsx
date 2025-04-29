@@ -12,11 +12,11 @@ export default function MenuButtons() {
                 <button className="btn">CARRERAS</button>
               </NavLink>
             </div>
-            <div>
+            {/* <div>
               <NavLink onClick={scrollTop} to="/registro">
                 <button className="btn">MATRÍCULA</button>
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </article>
       </section>

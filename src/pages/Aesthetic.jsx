@@ -95,7 +95,7 @@ export default function Aesthetic() {
             </div>
           </div>
           <div className="container-btn-link">
-            <NavLink className="btn-link" onClick={scrollTop} to="/registro">
+            <NavLink className="btn-link" onClick={scrollTop} to="/login">
               ¡Matrículate Ahora!
             </NavLink>
           </div>
